@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 0
+    path: Assets/_Scenes/Test/StudioX_Room1.unity
+    guid: 45b72910bdfe14f458a94fcb753c4530
+  - enabled: 0
+    path: Assets/_Scenes/Test/StudioX_Room2.unity
+    guid: 99df10384375ff64f8c8c64aa13b3386
+  - enabled: 0
+    path: Assets/_Scenes/Test/StudioX_Room3.unity
+    guid: 6ee6d3cdc2aa3da448b7318389c14405
+  - enabled: 0
+    path: Assets/_Scenes/Test/StudioX_Video1.unity
+    guid: dc17678499de07141b0c775043224047
+  - enabled: 0
+    path: Assets/_Scenes/Test/StudioX_Video2.unity
+    guid: eec7773b98b69274ea7cedd4aef7b9de
+  - enabled: 0
+    path: Assets/_Scenes/Test/VideoScene1.unity
+    guid: 7bd6d2fe689dfd6479d2381a39786b64
+  - enabled: 0
+    path: Assets/_Scenes/Test/VideoScene2.unity
+    guid: a28e67b03d3880940a5940f91de3c903
+  - enabled: 0
+    path: Assets/_Scenes/Test/VideoScene3.unity
+    guid: d8defb3be0b4b234aa3fff691d7945be
+  - enabled: 0
+    path: Assets/_Scenes/Test/VideoScene4.unity
+    guid: 816162d59d6e81a43b0f9bd4803d694d
+  - enabled: 0
+    path: Assets/_Scenes/Test/VideoScene5.unity
+    guid: 94efddfcd5927a54695b67adde6a0cd2
+  - enabled: 0
+    path: Assets/_Scenes/Room1.unity
+    guid: a52e3e4c6d83fa04889d473601e8e460
+  - enabled: 0
+    path: Assets/_Scenes/Scene0.unity
+    guid: 8b9f87c5d49946147bf47bdf7b5d727d
+  - enabled: 0
+    path: Assets/_Scenes/Scene1.unity
+    guid: e78165db81091c64581079799d1d8224
+  - enabled: 0
+    path: Assets/_Scenes/Scene2.unity
+    guid: da8ab7b0c48031244956247156300640
+  - enabled: 0
+    path: Assets/_Scenes/Scene3.unity
+    guid: 5d0f1c8333a06f546a565b1bdc8d1801
+  - enabled: 0
+    path: Assets/_Scenes/Scene4.unity
+    guid: 26ec880ab1ab1ff4780e396bfe7131f6
+  - enabled: 0
+    path: Assets/_Scenes/Scene5.unity
+    guid: de075504e173dd1488eb75b55934d0ce
+  - enabled: 0
+    path: Assets/_Scenes/Scene6.unity
+    guid: ca79f8b3109184a44aeaf54ae467fcc7
+  - enabled: 0
+    path: Assets/_Scenes/Scene7.unity
+    guid: cf70284c632637b48ab475c508744ab0
+  - enabled: 0
+    path: Assets/_Scenes/Scene8.unity
+    guid: 619667f45238a264f903d858d1f27e01
+  - enabled: 0
+    path: Assets/_Scenes/Scene9.unity
+    guid: e1c6efeb6c8b55241b75e563fc29fb6a
+  - enabled: 1
+    path: Assets/_Scenes/Main Tour.unity
+    guid: ef9e58a167a00e44c90fe1e9ecfbb80e
+  m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 088b161441f771345bd3439ecd7c1fa4, type: 2}
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: d8519d9a2808eaf4d8189f9880503770, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: c693369640c455d47839c9e31cb07f37, type: 2}
+  m_UseUCBPForAssetBundles: 0
