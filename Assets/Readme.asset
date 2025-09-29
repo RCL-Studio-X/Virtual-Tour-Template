@@ -12,23 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcf7219bab7fe46a1ad266029b2fee19, type: 3}
   m_Name: Readme
   m_EditorClassIdentifier: 
-  icon: {fileID: 2800000, guid: 727a75301c3d24613a3ebcec4a24c2c8, type: 3}
-  title: URP Empty Template
+  title: Read Me!
   sections:
-  - heading: Welcome to the Universal Render Pipeline
-    text: This template includes the settings and assets you need to start creating with the Universal Render Pipeline.
+  - heading: Welcome to the Virtual Tour Template
+    text: This template includes the components you need to get started with making your own virtual tour in VR.
     linkText: 
     url:
-  - heading: URP Documentation
+  - heading: Virtual Tour Documentation
     text:
-    linkText: Read more about URP
-    url: https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@latest
-  - heading: Forums
-    text:
-    linkText: Get answers and support
-    url: https://forum.unity.com/forums/universal-render-pipeline.383/
+    linkText: Read more at GitHub
+    url: https://github.com/RCL-Studio-X/Virtual-Tour-Template
+  - heading: Quick Start
+    text: Use the `Main Tour` scene located in `Assets/_Scenes` and add your video and audio clips to the `Tour Manager` component.
+    linkText:
+    url:
   - heading: Report bugs
     text:
-    linkText: Submit a report
-    url: https://unity3d.com/unity/qa/bug-reporting
+    linkText: Submit an issue on GitHub
+    url: https://github.com/RCL-Studio-X/Virtual-Tour-Template/issues
   loadedLayout: 1
