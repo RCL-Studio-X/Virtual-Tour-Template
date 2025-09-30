@@ -30,7 +30,7 @@ public class TourManager : MonoBehaviour
     public List<TextAsset> commentaryCaptions = new List<TextAsset>();
     public bool enableCaptions = true;
     private CaptionSource captionSource;
-    private List<Coroutine> runningCaptionCoroutines = new List<Coroutine>();
+    private readonly List<Coroutine> runningCaptionCoroutines = new List<Coroutine>();
 
     [Header("Background Audio Settings")]
     public List<AudioClip> backgroundAudio = new List<AudioClip>();
@@ -159,25 +159,32 @@ public class TourManager : MonoBehaviour
     private IEnumerator PlayCaptionWithDelay(string text, float duration, float delay)
     {
         yield return new WaitForSeconds(delay);
-        if (enableCommentaryAudio && captionSource != null)
+        if (enableCommentaryAudio && captionSource)
             captionSource.ShowTimedCaption(text, duration);
     }
 
 
     public void PlayVideoAtIndex(int index)
     {
-        bool hasCaptions = index >= 0 && index < commentaryCaptions.Count && commentaryCaptions[index] != null;
+        bool hasCaptions = index >= 0 && index < commentaryCaptions.Count && commentaryCaptions[index];
 
         captionsToggle.interactable = hasCaptions;
-
-        // Only update the visual state of the toggle if there are captions,
-        // but do NOT modify its "isOn" value if there aren't any — avoid affecting enableCaptions
+        
         if (hasCaptions)
         {
             captionsToggle.isOn = enableCaptions;
         }
+        
+        bool hasCommentary = index >= 0 && index < commentaryAudio.Count && commentaryAudio[index];
+        
+        commentaryToggle.interactable = hasCommentary;
 
-        if (xrOrigin != null)
+        if (hasCommentary)
+        {
+            commentaryToggle.isOn = enableCommentaryAudio;
+        }
+
+        if (xrOrigin)
             xrOrigin.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, defaultRotation, transform.rotation.eulerAngles.z);
 
         ClearAllCaptions();
@@ -228,7 +235,7 @@ public class TourManager : MonoBehaviour
             return;
         }
 
-        if (index >= 0 && index < backgroundAudio.Count && backgroundAudio[index] != null)
+        if (index >= 0 && index < backgroundAudio.Count && backgroundAudio[index])
         {
             backgroundAudioSource.clip = backgroundAudio[index];
             backgroundAudioSource.Play();
@@ -244,7 +251,7 @@ public class TourManager : MonoBehaviour
         commentaryAudioSource.volume = commentaryVolume;
 
         // Load matching captions if available
-        if (index >= 0 && index < commentaryCaptions.Count && commentaryCaptions[index] != null && enableCaptions)
+        if (index >= 0 && index < commentaryCaptions.Count && commentaryCaptions[index] && enableCaptions)
         {
             LoadCaptionsFromSRT(commentaryCaptions[index]);
         }
@@ -255,7 +262,7 @@ public class TourManager : MonoBehaviour
             return;
         }
 
-        if (index >= 0 && index < commentaryAudio.Count && commentaryAudio[index] != null)
+        if (index >= 0 && index < commentaryAudio.Count && commentaryAudio[index])
         {
             commentaryAudioSource.clip = commentaryAudio[index];
             commentaryAudioSource.Play();
@@ -318,13 +325,13 @@ public class TourManager : MonoBehaviour
             homeButton.interactable = currentIndex != 0;
     }
 
-    public void NextVideo()
+    private void NextVideo()
     {
         if (currentIndex + 1 < tourVideos.Count)
             PlayVideoAtIndex(currentIndex + 1);
     }
 
-    public void PreviousVideo()
+    private void PreviousVideo()
     {
         if (currentIndex - 1 >= 0)
             PlayVideoAtIndex(currentIndex - 1);
@@ -335,7 +342,7 @@ public class TourManager : MonoBehaviour
         return currentIndex;
     }
 
-    public string GetVideoDisplayName(int index)
+    private string GetVideoDisplayName(int index)
     {
         if (index >= 0 && index < videoDisplayNames.Count)
             return videoDisplayNames[index];
@@ -357,6 +364,4 @@ public class TourManager : MonoBehaviour
         if (captionSource != null && CaptionRenderManager.Instance != null && CaptionRenderManager.Instance.currentRenderer != null)
             CaptionRenderManager.Instance.ClearCaptions();
     }
-
-
 }
