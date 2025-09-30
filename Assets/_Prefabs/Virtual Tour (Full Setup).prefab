@@ -195,17 +195,7 @@ MonoBehaviour:
   defaultRotation: 80
   tourVideos: []
   startIndex: 0
-  commentaryAudio:
-  - {fileID: 0}
-  - {fileID: 8300000, guid: c9c690d98a0f01f4b87d212cef542d68, type: 3}
-  - {fileID: 8300000, guid: 217f22ab5e7f3e24b93ef0817659e85b, type: 3}
-  - {fileID: 8300000, guid: 334943a926503e94ca893cd2cd9282c3, type: 3}
-  - {fileID: 8300000, guid: 6725e1a0d16b711429f800436a76f666, type: 3}
-  - {fileID: 8300000, guid: 3e07c7dbdb4534a44a6126e03aec8aee, type: 3}
-  - {fileID: 8300000, guid: 56cfa6675f3a39e4784bb32538749614, type: 3}
-  - {fileID: 8300000, guid: 689c9a47be9757d479dd0f1eae5ee2d9, type: 3}
-  - {fileID: 8300000, guid: 63e4279e24d3af34b81bf91f921e1361, type: 3}
-  - {fileID: 8300000, guid: 58aaecb46e5910a409f7c03929520806, type: 3}
+  commentaryAudio: []
   enableCommentaryAudio: 1
   commentaryVolume: 1
   commentaryCaptions: []
