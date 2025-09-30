@@ -303,7 +303,7 @@ GameObject:
   - component: {fileID: 1859873127326764414}
   - component: {fileID: 7597222322192184217}
   m_Layer: 2
-  m_Name: XR Origin (Virtual Tour)
+  m_Name: XR Origin (Virtual Tour) (No Commentary Toggle)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2552,6 +2552,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3560391573274743763, guid: f31aa1c5e99995645824f3ad8ba122be, type: 3}
+      propertyPath: m_PresetInfoIsWorld
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4881565962234129045, guid: f31aa1c5e99995645824f3ad8ba122be, type: 3}
       propertyPath: m_Interactable
       value: 0
@@ -2566,11 +2570,11 @@ PrefabInstance:
       objectReference: {fileID: 5939992451245106264}
     - target: {fileID: 6271389340999022868, guid: f31aa1c5e99995645824f3ad8ba122be, type: 3}
       propertyPath: m_Size
-      value: 0.38666663
+      value: 0.38666666
       objectReference: {fileID: 0}
     - target: {fileID: 6271389340999022868, guid: f31aa1c5e99995645824f3ad8ba122be, type: 3}
       propertyPath: m_Value
-      value: 0.99995357
+      value: 0.99995375
       objectReference: {fileID: 0}
     - target: {fileID: 6506221646615493880, guid: f31aa1c5e99995645824f3ad8ba122be, type: 3}
       propertyPath: 'videoDisplayNames.Array.data[0]'
