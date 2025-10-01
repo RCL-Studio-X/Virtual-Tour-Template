@@ -101,3 +101,11 @@ InitTestScene*.unity*
 # Extra gitignores
 .vsconfig
 .idea
+
+# Video, Audio, and Captions
+
+*.mp4*
+*.m4a*
+*.mp3*
+*.ogg*
+*.txt*
