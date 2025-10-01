@@ -14,19 +14,20 @@ public class TourMenuController : MonoBehaviour
     public float slotSpacing = 3f;
     public float bottomPadding = 20f;
 
-    [Header("Configuration")]
-    [Tooltip("Optional - custom display names for tour videos")]
-    public List<string> videoDisplayNames = new List<string>();
+    private List<string> videoDisplayNames;
+    
+    private TourManager tourManager;
 
-    [Tooltip("Reference to the TourManager")]
-    public TourManager tourManager;
-
-    private List<GameObject> createdSlots = new List<GameObject>();
+    private readonly List<GameObject> createdSlots = new List<GameObject>();
 
     private void Start()
     {
+        if(tourManager == null)
+            tourManager = FindFirstObjectByType<TourManager>();
+        
         if (tourManager != null)
         {
+            videoDisplayNames = tourManager.videoDisplayNames;
             tourManager.OnVideoChanged += OnVideoChanged;
         }
 

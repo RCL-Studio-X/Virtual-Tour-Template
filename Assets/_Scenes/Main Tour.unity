@@ -207,6 +207,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2029813385678002890, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: videoDisplayNames.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3649993256357206893, guid: a375420a3446cff4a8202556fc42870c, type: 3}
       propertyPath: m_Name
       value: Virtual Tour (Full Setup)
@@ -224,11 +228,43 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
-      propertyPath: commentaryAudio.Array.size
+      propertyPath: enableCaptions
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: enableCommentaryAudio
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: tourVideos.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: 'tourVideos.Array.data[0]'
+      value: 
+      objectReference: {fileID: 32900000, guid: c36209548f7bf014083b53c538b3f21a, type: 3}
+    - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: 'tourVideos.Array.data[1]'
+      value: 
+      objectReference: {fileID: 32900000, guid: 8b59552a20ae8f443b9cc22b6d3a9375, type: 3}
+    - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: 'tourVideos.Array.data[2]'
+      value: 
+      objectReference: {fileID: 32900000, guid: ddd9fdd6cb13cfe4394f669bf59ed54c, type: 3}
+    - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
       propertyPath: videoDisplayNames.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7534836741420838587, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7534836741420838587, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7534836741420838587, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

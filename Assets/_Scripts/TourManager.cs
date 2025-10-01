@@ -56,12 +56,28 @@ public class TourManager : MonoBehaviour
     [Tooltip("Optional - custom display names for each video")]
     public List<string> videoDisplayNames = new List<string>();
     public TitleCanvasManager titleCanvasManager;
-
+    
     private void Awake()
     {
+        InitializeVideoDisplayNames();
         SetupComponents();
         SetupUI();
         PlayVideoAtIndex(startIndex);
+    }
+
+    private void InitializeVideoDisplayNames()
+    {
+        for (int i = 0; i < tourVideos.Count; i++)
+        {
+            if (i < videoDisplayNames.Count)
+            {
+                videoDisplayNames[i] = GetVideoDisplayName(i);
+            }
+            else
+            {
+                videoDisplayNames.Add(GetVideoDisplayName(i));
+            }
+        }
     }
 
     private void SetupComponents()
@@ -345,7 +361,8 @@ public class TourManager : MonoBehaviour
     private string GetVideoDisplayName(int index)
     {
         if (index >= 0 && index < videoDisplayNames.Count)
-            return videoDisplayNames[index];
+            if (videoDisplayNames[index] != null)
+                return videoDisplayNames[index];
 
         if (index >= 0 && index < tourVideos.Count && tourVideos[index] != null)
             return tourVideos[index].name;
