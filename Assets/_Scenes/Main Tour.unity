@@ -232,6 +232,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: enableBackgroundAudio
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
       propertyPath: enableCommentaryAudio
       value: 0
       objectReference: {fileID: 0}
@@ -252,8 +256,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 32900000, guid: ddd9fdd6cb13cfe4394f669bf59ed54c, type: 3}
     - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: backgroundAudio.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
       propertyPath: videoDisplayNames.Array.size
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: 'videoDisplayNames.Array.data[0]'
+      value: Welcome
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: 'videoDisplayNames.Array.data[1]'
+      value: Service Point
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: 'videoDisplayNames.Array.data[2]'
+      value: Salon
       objectReference: {fileID: 0}
     - target: {fileID: 7534836741420838587, guid: a375420a3446cff4a8202556fc42870c, type: 3}
       propertyPath: m_AnchorMax.x
