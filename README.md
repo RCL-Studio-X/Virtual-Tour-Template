@@ -9,4 +9,4 @@ Examples of tours made with this project:
 
 ## Prerequisites
 
-- [Unity Editor 6000.0.35f1](https://unity.com/releases/editor/whats-new/6000.0.35f1#installs) (You can try a more recent version of Unity, but compatibility is not guaranteed)
+- [Unity Editor 6000.0.58f2](https://unity.com/releases/editor/whats-new/6000.0.58f2#installs) (You can try a more recent version of Unity, but compatibility is not guaranteed)
