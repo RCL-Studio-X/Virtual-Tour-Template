@@ -12,12 +12,16 @@ public class TourManager : MonoBehaviour
     public int CurrentVideoIndex => currentIndex;
 
     public GameObject xrOrigin;
-    [Tooltip("What the XR Origin's Y rotation will be when switching to a new video.")]
-    public float defaultRotation = 80f;
+    [Tooltip("What the XR Origin's Y rotation will be when switching to each video. Each video not assigned a rotation value will default to 80.")]
+    public List<float> defaultRotations = new List<float>();
 
     [Header("Video Tour Settings")]
     public List<VideoClip> tourVideos = new List<VideoClip>();
     public int startIndex = 0;
+    [Tooltip("Enabling this will allow the audio in the video to be played directly to the headset.")]
+    public bool enableBackgroundAudio = true;
+    [Range(0f, 1f)]
+    public float backgroundAudioVolume = 0.25f;
 
     [Header("Commentary Audio Settings")]
     public List<AudioClip> commentaryAudio = new List<AudioClip>();
@@ -32,11 +36,12 @@ public class TourManager : MonoBehaviour
     private CaptionSource captionSource;
     private readonly List<Coroutine> runningCaptionCoroutines = new List<Coroutine>();
 
-    [Header("Background Audio Settings")]
-    public List<AudioClip> backgroundAudio = new List<AudioClip>();
-    public bool enableBackgroundAudio = true;
+    [Header("Custom Background Audio Settings")]
+    public List<AudioClip> customBackgroundAudio = new List<AudioClip>();
+    [Tooltip("Enabling this will override the video's background audio with your own custom audio track(s).")]
+    public bool enableCustomBackgroundAudio = true;
     [Range(0f, 1f)]
-    public float backgroundVolume = 0.25f;
+    public float customBackgroundVolume = 0.25f;
 
     [Header("UI Controls")]
     public Button nextButton;
@@ -47,7 +52,7 @@ public class TourManager : MonoBehaviour
 
     private int currentIndex = 0;
     private VideoPlayer videoPlayer;
-    private AudioSource backgroundAudioSource;
+    private AudioSource customBackgroundAudioSource;
     private AudioSource commentaryAudioSource;
     private RenderTexture renderTexture;
     private Material skyboxMaterial;
@@ -100,13 +105,17 @@ public class TourManager : MonoBehaviour
 
         videoPlayer.isLooping = true;
         videoPlayer.playOnAwake = false;
+        if (!enableBackgroundAudio)
+            videoPlayer.SetDirectAudioVolume(0, 0);
+        else
+            videoPlayer.SetDirectAudioVolume(0, backgroundAudioVolume);
 
         // Setup Background Audio Source
-        backgroundAudioSource = gameObject.AddComponent<AudioSource>();
-        backgroundAudioSource.playOnAwake = false;
-        backgroundAudioSource.loop = true;
-        backgroundAudioSource.spatialBlend = 0f; // 2D audio
-        backgroundAudioSource.volume = backgroundVolume;
+        customBackgroundAudioSource = gameObject.AddComponent<AudioSource>();
+        customBackgroundAudioSource.playOnAwake = false;
+        customBackgroundAudioSource.loop = true;
+        customBackgroundAudioSource.spatialBlend = 0f; // 2D audio
+        customBackgroundAudioSource.volume = customBackgroundVolume;
 
         // Setup Commentary Audio Source
         commentaryAudioSource = gameObject.AddComponent<AudioSource>();
@@ -123,7 +132,12 @@ public class TourManager : MonoBehaviour
         captionSource.audioSource = commentaryAudioSource;
         captionSource.boundingObject = gameObject;
 
-        //defaultRotation = xrOrigin.transform.rotation.y;
+        //Set up Rotation Values
+        for (int i = 0; i < tourVideos.Count; i++)
+        {
+            if (i > defaultRotations.Count)
+                defaultRotations.Add(80f);
+        }
     }
 
     private void SetupUI()
@@ -201,7 +215,7 @@ public class TourManager : MonoBehaviour
         }
 
         if (xrOrigin)
-            xrOrigin.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, defaultRotation, transform.rotation.eulerAngles.z);
+            xrOrigin.transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, defaultRotations[index], transform.rotation.eulerAngles.z);
 
         ClearAllCaptions();
 
@@ -233,7 +247,7 @@ public class TourManager : MonoBehaviour
 
             skyboxMaterial.SetTexture("_MainTex", renderTexture);
         }
-
+        
         HandleBackgroundAudio(index);
         HandleCommentaryAudio(index);
 
@@ -243,23 +257,30 @@ public class TourManager : MonoBehaviour
 
     private void HandleBackgroundAudio(int index)
     {
-        backgroundAudioSource.volume = backgroundVolume;
+        // Handle custom background audio
+        customBackgroundAudioSource.volume = customBackgroundVolume;
 
-        if (!enableBackgroundAudio)
+        if (!enableCustomBackgroundAudio)
         {
-            backgroundAudioSource.Stop();
+            customBackgroundAudioSource.Stop();
             return;
         }
 
-        if (index >= 0 && index < backgroundAudio.Count && backgroundAudio[index])
+        if (index >= 0 && index < customBackgroundAudio.Count && customBackgroundAudio[index])
         {
-            backgroundAudioSource.clip = backgroundAudio[index];
-            backgroundAudioSource.Play();
+            customBackgroundAudioSource.clip = customBackgroundAudio[index];
+            customBackgroundAudioSource.Play();
+            videoPlayer.SetDirectAudioVolume(0, 0);
+            return;
         }
+
+        customBackgroundAudioSource.Stop();
+
+        // If no custom audio available, then play the video's audio (if enabled)
+        if (!enableBackgroundAudio)
+            videoPlayer.SetDirectAudioVolume(0, 0);
         else
-        {
-            backgroundAudioSource.Stop();
-        }
+            videoPlayer.SetDirectAudioVolume(0, backgroundAudioVolume);
     }
 
     private void HandleCommentaryAudio(int index)
