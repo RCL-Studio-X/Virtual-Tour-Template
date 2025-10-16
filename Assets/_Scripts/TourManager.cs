@@ -15,7 +15,7 @@ public class TourManager : MonoBehaviour
     [Tooltip("What the XR Origin's Y rotation will be when switching to a new video.")]
     public float defaultRotation = 80f;
 
-    [Header("Video Tour Settings")]
+    [Header("Video Settings")]
     public List<VideoClip> tourVideos = new List<VideoClip>();
     public int startIndex = 0;
 
@@ -33,7 +33,8 @@ public class TourManager : MonoBehaviour
     private readonly List<Coroutine> runningCaptionCoroutines = new List<Coroutine>();
 
     [Header("Background Audio Settings")]
-    public List<AudioClip> backgroundAudio = new List<AudioClip>();
+    [Tooltip("If you do not set custom audio tracks for your background audio, audio from the video file will be played if available.")]
+    public List<AudioClip> customBackgroundAudio = new List<AudioClip>();
     public bool enableBackgroundAudio = true;
     [Range(0f, 1f)]
     public float backgroundVolume = 0.25f;
@@ -227,10 +228,13 @@ public class TourManager : MonoBehaviour
             renderTexture = new RenderTexture((int)clip.width, (int)clip.height, 0);
             renderTexture.Create();
 
+            
             videoPlayer.clip = clip;
             videoPlayer.targetTexture = renderTexture;
             videoPlayer.Play();
 
+
+            
             skyboxMaterial.SetTexture("_MainTex", renderTexture);
         }
 
@@ -248,19 +252,35 @@ public class TourManager : MonoBehaviour
         if (!enableBackgroundAudio)
         {
             backgroundAudioSource.Stop();
+            videoPlayer.audioOutputMode = VideoAudioOutputMode.None;
             return;
         }
 
-        if (index >= 0 && index < backgroundAudio.Count && backgroundAudio[index])
+        // If a custom background audio clip exists, play that
+        if (index >= 0 && index < customBackgroundAudio.Count && customBackgroundAudio[index] != null)
         {
-            backgroundAudioSource.clip = backgroundAudio[index];
+            videoPlayer.audioOutputMode = VideoAudioOutputMode.None; // disable video audio
+            backgroundAudioSource.clip = customBackgroundAudio[index];
             backgroundAudioSource.Play();
+            return;
+        }
+
+        // Otherwise, play the audio track embedded in the video
+        if (videoPlayer != null && videoPlayer.clip != null && videoPlayer.audioTrackCount > 0)
+        {
+            videoPlayer.audioOutputMode = VideoAudioOutputMode.AudioSource;
+            videoPlayer.EnableAudioTrack(0, true); // use first audio track
+            videoPlayer.SetTargetAudioSource(0, backgroundAudioSource);
+            backgroundAudioSource.loop = true;
+            backgroundAudioSource.Play(); // optional, since VideoPlayer controls it
         }
         else
         {
             backgroundAudioSource.Stop();
+            videoPlayer.audioOutputMode = VideoAudioOutputMode.None;
         }
     }
+
 
     private void HandleCommentaryAudio(int index)
     {
