@@ -362,7 +362,8 @@ public class TourManager : MonoBehaviour
     {
         if (index >= 0 && index < videoDisplayNames.Count)
             if (videoDisplayNames[index] != null)
-                return videoDisplayNames[index];
+                if (!videoDisplayNames[index].Equals(""))
+                    return videoDisplayNames[index];
 
         if (index >= 0 && index < tourVideos.Count && tourVideos[index] != null)
             return tourVideos[index].name;
