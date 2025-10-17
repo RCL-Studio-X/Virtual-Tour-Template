@@ -51,6 +51,7 @@ public class TourManager : MonoBehaviour
     public Toggle captionsToggle;
 
     private int currentIndex = 0;
+    private bool _isSpawn = true;
     private VideoPlayer videoPlayer;
     private AudioSource customBackgroundAudioSource;
     private AudioSource commentaryAudioSource;
@@ -67,6 +68,10 @@ public class TourManager : MonoBehaviour
         InitializeVideoDisplayNames();
         SetupComponents();
         SetupUI();
+    }
+
+    private void Start()
+    {
         PlayVideoAtIndex(startIndex);
     }
 
@@ -247,15 +252,29 @@ public class TourManager : MonoBehaviour
 
             skyboxMaterial.SetTexture("_MainTex", renderTexture);
         }
-        
-        HandleBackgroundAudio(index);
-        HandleCommentaryAudio(index);
+
+        if (_isSpawn)
+            StartCoroutine(DelayedStartAudio(index));
+        else
+        {
+            HandleCustomBackgroundAudio(index);
+            HandleCommentaryAudio(index);
+        }
 
         UpdateButtonStates();
         OnVideoChanged?.Invoke(currentIndex);
+        _isSpawn = false;
+    }
+    
+    private IEnumerator DelayedStartAudio(int index)
+    {
+        yield return new WaitForEndOfFrame();
+
+        HandleCustomBackgroundAudio(index);
+        HandleCommentaryAudio(index);
     }
 
-    private void HandleBackgroundAudio(int index)
+    private void HandleCustomBackgroundAudio(int index)
     {
         // Handle custom background audio
         customBackgroundAudioSource.volume = customBackgroundVolume;
@@ -340,7 +359,7 @@ public class TourManager : MonoBehaviour
             if (commentaryCaptions != null && currentIndex >= 0 && currentIndex < commentaryCaptions.Count)
             {
                 TextAsset srt = commentaryCaptions[currentIndex];
-                if (srt != null)
+                if (srt != null && commentaryAudioSource.clip != null)
                 {
                     double currentTime = commentaryAudioSource.time;
                     LoadCaptionsFromSRT(srt, currentTime);
@@ -356,7 +375,9 @@ public class TourManager : MonoBehaviour
             prevButton.interactable = currentIndex > 0;
 
         if (nextButton != null)
-            nextButton.interactable = currentIndex < tourVideos.Count - 1;
+            nextButton.interactable = currentIndex < tourVideos.Count -1;
+        
+        Debug.Log("currentIndex: " + currentIndex + ", tourVideos.Count: " + (tourVideos.Count));
 
         if (homeButton != null)
             homeButton.interactable = currentIndex != 0;
