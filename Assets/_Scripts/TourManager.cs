@@ -140,7 +140,7 @@ public class TourManager : MonoBehaviour
         //Set up Rotation Values
         for (int i = 0; i < tourVideos.Count; i++)
         {
-            if (i > defaultRotations.Count)
+            if (i >= defaultRotations.Count)
                 defaultRotations.Add(80f);
         }
     }
