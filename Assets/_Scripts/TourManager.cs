@@ -376,8 +376,6 @@ public class TourManager : MonoBehaviour
 
         if (nextButton != null)
             nextButton.interactable = currentIndex < tourVideos.Count -1;
-        
-        Debug.Log("currentIndex: " + currentIndex + ", tourVideos.Count: " + (tourVideos.Count));
 
         if (homeButton != null)
             homeButton.interactable = currentIndex != 0;
