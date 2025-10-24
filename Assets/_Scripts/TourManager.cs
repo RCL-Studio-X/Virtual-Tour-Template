@@ -438,7 +438,7 @@ public class TourManager : MonoBehaviour
         }
         runningCaptionCoroutines.Clear();
 
-        if (captionSource != null && CaptionRenderManager.Instance != null && CaptionRenderManager.Instance.currentRenderer != null)
+        if (!captionSource && !CaptionRenderManager.Instance && !CaptionRenderManager.Instance.currentRenderer)
             CaptionRenderManager.Instance.ClearCaptions();
     }
 }
