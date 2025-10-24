@@ -19,9 +19,9 @@ public class TourManager : MonoBehaviour
     public List<VideoClip> tourVideos = new List<VideoClip>();
     [Tooltip("Specify which video is played first by index number. 0 is the first video, 1 is the second video, etc...")]
     public int startIndex = 0;
-    [Tooltip("Once the last video ends, automatically go back to the video at `startIndex`.")]
+    [Tooltip("Once the last video ends, automatically go back to the starting video.")]
     public bool restartTourAfterLastVideo = false;
-    [Tooltip("Auto Advance to next video once the current vide finishes playing.")]
+    [Tooltip("Auto Advance to next video once the current video finishes playing.")]
     public bool autoAdvanceVideo = false;
     [Tooltip("Enabling this will allow the audio in the video to be played directly to the headset.")]
     public bool enableBackgroundAudio = true;
