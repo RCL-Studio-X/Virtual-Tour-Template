@@ -19,6 +19,10 @@ public class TourManager : MonoBehaviour
     public List<VideoClip> tourVideos = new List<VideoClip>();
     [Tooltip("Specify which video is played first by index number. 0 is the first video, 1 is the second video, etc...")]
     public int startIndex = 0;
+    [Tooltip("Once the last video ends, automatically go back to the video at `startIndex`.")]
+    public bool restartTourAfterLastVideo = false;
+    [Tooltip("Auto Advance to next video once the current vide finishes playing.")]
+    public bool autoAdvanceVideo = false;
     [Tooltip("Enabling this will allow the audio in the video to be played directly to the headset.")]
     public bool enableBackgroundAudio = true;
     [Range(0f, 1f)]
@@ -110,6 +114,8 @@ public class TourManager : MonoBehaviour
             videoPlayer = gameObject.AddComponent<VideoPlayer>();
 
         videoPlayer.isLooping = true;
+		videoPlayer.loopPointReached += OnVideoEnd;
+
         videoPlayer.playOnAwake = false;
         if (!enableBackgroundAudio)
             videoPlayer.SetDirectAudioVolume(0, 0);
@@ -266,6 +272,18 @@ public class TourManager : MonoBehaviour
         OnVideoChanged?.Invoke(currentIndex);
         _isSpawn = false;
     }
+
+	private void OnVideoEnd(VideoPlayer vp)
+    {
+    	if ((currentIndex >= tourVideos.Count - 1) && restartTourAfterLastVideo)
+    	{
+        	PlayVideoAtIndex(startIndex);
+    	}
+    	else if (autoAdvanceVideo)
+    	{
+        	PlayVideoAtIndex(currentIndex + 1);
+    	}
+	}
     
     private IEnumerator DelayedStartAudio(int index)
     {
