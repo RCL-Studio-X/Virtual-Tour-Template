@@ -175,7 +175,7 @@ public class TourManager : MonoBehaviour
     {
         ClearAllCaptions();
 
-        if (captionSource == null || srt == null) return;
+        if (!captionSource || !srt) return;
 
         List<SubtitleBlock> subtitleBlocks = SRTParser.Load(srt);
         if (subtitleBlocks == null) return;
@@ -438,7 +438,7 @@ public class TourManager : MonoBehaviour
         }
         runningCaptionCoroutines.Clear();
 
-        if (!captionSource && !CaptionRenderManager.Instance && !CaptionRenderManager.Instance.currentRenderer)
+        if (captionSource && CaptionRenderManager.Instance && CaptionRenderManager.Instance.currentRenderer)
             CaptionRenderManager.Instance.ClearCaptions();
     }
 }
