@@ -18,8 +18,8 @@ The following is a quick start guide for how to use this template to create your
 
 #### Importing Assets
 
-1. Place your 360 videos (in H.264 or H.265 `.mp4` format) in `Assets/_Resources/360_Videos`.
-2. (Optional) Place your background audio (in vorbis `.ogg` format or [another audio format compatible with Unity](https://support.unity.com/hc/en-us/articles/206484803-What-are-the-supported-Audio-formats-in-Unity)) in `Assets/_Resources/Audio_Background`.
+1. Place your 360 videos (in H.264 or H.265 `.mp4` format) in `Assets/_Resources/360_Videos`. Note: you can use audio that is in the video as background audio.
+2. (Optional) Place your custom background audio (in vorbis `.ogg` format or [another audio format compatible with Unity](https://support.unity.com/hc/en-us/articles/206484803-What-are-the-supported-Audio-formats-in-Unity)) in `Assets/_Resources/Audio_Background`.
 3. (Optional) Place your Commentary Audio (in vorbis `.ogg` format or [another audio format compatible with Unity](https://support.unity.com/hc/en-us/articles/206484803-What-are-the-supported-Audio-formats-in-Unity)) in `Assets/_Resources/Audio_Commentary`.
 4. (Optional) Place the subtitles for your Commentary Audio in `Assets/_Resources/Subtitles_Commentary`.
 
