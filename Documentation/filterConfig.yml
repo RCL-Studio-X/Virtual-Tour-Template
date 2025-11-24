@@ -1,6 +1,6 @@
 apiRules:
 - include:
-    uidRegex: ^DocFxForUnity
+    uidRegex: ^Virtual-Tour-Template
     type: Namespace
 - include:
     uidRegex: ^Global
