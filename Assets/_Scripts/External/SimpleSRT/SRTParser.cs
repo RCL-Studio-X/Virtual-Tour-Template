@@ -36,6 +36,10 @@ namespace StudioX.VirtualTour.External.SimpleSRT
     /// Parses SRT subtitle files into <see cref="SubtitleBlock"/> objects.
     /// Supports parsing from a Resources path or directly from a <see cref="TextAsset"/>.
     /// </summary>
+    /// <remarks>
+    /// Original implementation by roguecode (MIT License).
+    /// See file header for more details.
+    /// </remarks>
     public class SRTParser
     {
         private List<SubtitleBlock> _subtitles;
