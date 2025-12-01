@@ -7,7 +7,7 @@ using TMPro;
 namespace StudioX.VirtualTour.UI
 {
     /// <summary>
-    /// Controls population and interaction behavior for the tour selection menu.
+    /// Controls population and interaction behavior for the video selection menu.
     /// </summary>
     public class TourMenuController : MonoBehaviour
     {
