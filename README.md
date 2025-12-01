@@ -33,3 +33,7 @@ The following is a quick start guide for how to use this template to create your
 2. Select the `Virtual Tour (Full Setup)` GameObject.
 3. In the `Inspector` Window, add your videos, audio, and subtitles by dragging them  into the appropriate lists in the `Tour Manager` script.
 4. (Optional) Manually set the names of each video in the `Tour Manager` script by editing the `Video Display Names` list. If you do not set these names manually, the `Tour Manager` will automatically assign those names as the filenames of the videos (without the file extension).
+
+## Development
+
+You can view the C# documentation for our custom scripts here: [https://rcl-studio-x.github.io/Virtual-Tour-Template/](https://rcl-studio-x.github.io/Virtual-Tour-Template/)
