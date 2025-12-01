@@ -229,15 +229,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
       propertyPath: enableCaptions
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
       propertyPath: enableBackgroundAudio
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
       propertyPath: enableCommentaryAudio
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
       propertyPath: tourVideos.Array.size
@@ -260,8 +260,28 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: commentaryAudio.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
       propertyPath: videoDisplayNames.Array.size
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: 'commentaryAudio.Array.data[0]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 6bc9231a9d2b7bd45b07f15634ccb2a0, type: 3}
+    - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: 'commentaryAudio.Array.data[1]'
+      value: 
+      objectReference: {fileID: 8300000, guid: d19e76ba6c3835946bb409ecf32b1ed7, type: 3}
+    - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: 'commentaryAudio.Array.data[2]'
+      value: 
+      objectReference: {fileID: 8300000, guid: 90728de8c81b8d84795e3e7664d9e64c, type: 3}
+    - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: commentaryCaptions.Array.size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
       propertyPath: 'videoDisplayNames.Array.data[0]'
@@ -275,6 +295,18 @@ PrefabInstance:
       propertyPath: 'videoDisplayNames.Array.data[2]'
       value: Salon
       objectReference: {fileID: 0}
+    - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: 'commentaryCaptions.Array.data[0]'
+      value: 
+      objectReference: {fileID: 4900000, guid: 86b1184780a1aeb479caf374cb104588, type: 3}
+    - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: 'commentaryCaptions.Array.data[1]'
+      value: 
+      objectReference: {fileID: 4900000, guid: 5ad483085825b2c458a182e8aa73dd5d, type: 3}
+    - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: 'commentaryCaptions.Array.data[2]'
+      value: 
+      objectReference: {fileID: 4900000, guid: 2682010675b4ea84a877361f7491683a, type: 3}
     - target: {fileID: 7534836741420838587, guid: a375420a3446cff4a8202556fc42870c, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
