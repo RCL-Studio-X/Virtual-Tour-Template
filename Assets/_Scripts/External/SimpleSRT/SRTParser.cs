@@ -28,6 +28,7 @@ SOFTWARE.
 GitHub Repository: https://github.com/roguecode/Unity-Simple-SRT
 File Obtained from: https://github.com/roguecode/Unity-Simple-SRT/blob/master/src/Assets/SimpleSRT/SRTParser.cs
 Accessed on 6/25/2025 at 01:05 PM EST.
+This file has been modified from its original source.
 */
 
 namespace StudioX.VirtualTour.External.SimpleSRT
@@ -70,7 +71,7 @@ namespace StudioX.VirtualTour.External.SimpleSRT
         /// <returns>A list of parsed <see cref="SubtitleBlock"/> objects, or null if the file is missing.</returns>
         public static List<SubtitleBlock> Load(TextAsset textAsset)
         {
-            if (textAsset == null)
+            if (textAsset)
             {
                 Debug.LogError("Subtitle file is null");
                 return null;
