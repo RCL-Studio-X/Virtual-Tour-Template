@@ -54,7 +54,7 @@ PROJECT_NUMBER         =
 # for a project that appears at the top of each page and should give viewers a
 # quick idea about the purpose of the project. Keep the description short.
 
-PROJECT_BRIEF          = "Make your own interactive VR 360 video tour with this template Unity project!"
+PROJECT_BRIEF          = "C# Documentation for an interactive VR 360 video tour template Unity project created by Studio X Students and Staff."
 
 # With the PROJECT_LOGO tag one can specify a logo or an icon that is included
 # in the documentation. The maximum height of the logo should not exceed 55
