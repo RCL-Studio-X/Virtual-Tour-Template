@@ -29,11 +29,11 @@ namespace StudioX.VirtualTour.Core
         /// Current active video index.
         /// </summary>
         public int CurrentVideoIndex => _currentIndex;
-
+        
         [Header("References")]
         [Tooltip("Optional XR origin whose Y rotation will be set when switching videos.")]
         public GameObject xrOrigin;
-
+        
         [Tooltip("What the XR Origin's Y rotation will be when switching to each video. Each video that has no override will default to 80.")]
         public List<float> defaultRotations = new List<float>();
 
@@ -116,7 +116,7 @@ namespace StudioX.VirtualTour.Core
         // Private backing fields
         private int _currentIndex = 0;
         private bool _isSpawn = true;
-
+        
         private VideoPlayer _videoPlayer;
         private AudioSource _customBackgroundAudioSource;
         private AudioSource _commentaryAudioSource;
