@@ -101,6 +101,7 @@ InitTestScene*.unity*
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
 
 # Extra gitignores
+.vscode
 .vsconfig
 .idea
 
@@ -111,3 +112,6 @@ InitTestScene*.unity*
 *.mp3*
 *.ogg*
 *.txt*
+
+# XR Settings
+Assets/XR/Settings
