@@ -58,19 +58,19 @@ namespace StudioX.VirtualTour.Core
         public float backgroundAudioVolume = 0.25f;
 
         [Header("Commentary Audio Settings")]
-        [Tooltip("Optional commentary audio tracks that correspond to each video.")]
-        public List<AudioClip> commentaryAudio = new List<AudioClip>();
+        [Tooltip("Optional commentary audio objects for each supported language.")]
+        public List<CommentaryAudio> commentaryAudio = new List<CommentaryAudio>();
 
         [Tooltip("Allow commentary audio to play.")]
         public bool enableCommentaryAudio = true;
+        [Tooltip("Index of the currently selected language in the commentaryAudio list.")]
+        public int selectedLanguage = 0;
 
         [Range(0f, 1f)]
         [Tooltip("Commentary audio volume.")]
         public float commentaryVolume = 1.0f;
 
         [Header("Captions")]
-        [Tooltip("SRT/TextAsset captions for commentary audio tracks (same order as commentaryAudio).")]
-        public List<TextAsset> commentaryCaptions = new List<TextAsset>();
 
         [Tooltip("Enable showing captions from loaded SRTs.")]
         public bool enableCaptions = true;
@@ -296,7 +296,7 @@ namespace StudioX.VirtualTour.Core
             }
 
             // Configure toggles based on available assets
-            bool hasCaptions = (index >= 0 && index < commentaryCaptions.Count) && commentaryCaptions[index];
+            bool hasCaptions = (index >= 0 && index < commentaryAudio[selectedLanguage].captionsList.Count) && commentaryAudio[selectedLanguage].captionsList[index];
             if (captionsToggle)
                 captionsToggle.interactable = hasCaptions;
 
@@ -426,9 +426,9 @@ namespace StudioX.VirtualTour.Core
         {
             _commentaryAudioSource.volume = commentaryVolume;
 
-            bool shouldLoadCaptions = (index >= 0 && index < commentaryCaptions.Count) && commentaryCaptions[index] && enableCaptions;
+            bool shouldLoadCaptions = (index >= 0 && index < commentaryAudio[selectedLanguage].captionsList.Count) && commentaryAudio[selectedLanguage].captionsList[index] && enableCaptions;
             if (shouldLoadCaptions)
-                LoadCaptionsFromSRT(commentaryCaptions[index]);
+                LoadCaptionsFromSRT(commentaryAudio[selectedLanguage].captionsList[index]);
 
             if (!enableCommentaryAudio)
             {
@@ -436,10 +436,10 @@ namespace StudioX.VirtualTour.Core
                 return;
             }
 
-            bool hasCommentary = (index >= 0 && index < commentaryAudio.Count) && commentaryAudio[index];
+            bool hasCommentary = (index >= 0 && index < commentaryAudio[selectedLanguage].audioList.Count) && commentaryAudio[selectedLanguage].audioList[index];
             if (hasCommentary)
             {
-                _commentaryAudioSource.clip = commentaryAudio[index];
+                _commentaryAudioSource.clip = commentaryAudio[selectedLanguage].audioList[index];
                 _commentaryAudioSource.Play();
                 return;
             }
@@ -479,10 +479,10 @@ namespace StudioX.VirtualTour.Core
                 return;
             }
 
-            if (commentaryCaptions?.Count > _currentIndex && commentaryCaptions[_currentIndex] && _commentaryAudioSource.clip)
+            if (commentaryAudio[selectedLanguage].captionsList?.Count > _currentIndex && commentaryAudio[selectedLanguage].captionsList[_currentIndex] && _commentaryAudioSource.clip)
             {
                 double currentTime = _commentaryAudioSource.time;
-                LoadCaptionsFromSRT(commentaryCaptions[_currentIndex], currentTime);
+                LoadCaptionsFromSRT(commentaryAudio[selectedLanguage].captionsList[_currentIndex], currentTime);
             }
         }
 
