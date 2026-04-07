@@ -35,11 +35,11 @@ namespace StudioX.VirtualTour.Core
         public GameObject xrOrigin;
         
         [Tooltip("What the XR Origin's Y rotation will be when switching to each video. Each video that has no override will default to 80.")]
-        public List<float> defaultRotations = new List<float>();
+        public List<float> defaultRotations = new();
 
         [Header("Video Tour Settings")]
         [Tooltip("Video clips that comprise the tour.")]
-        public List<VideoClip> tourVideos = new List<VideoClip>();
+        public List<VideoClip> tourVideos = new();
 
         [Tooltip("Index of the video to start from (0 = first).")]
         public int startIndex = 0;
@@ -59,7 +59,7 @@ namespace StudioX.VirtualTour.Core
 
         [Header("Commentary Audio Settings")]
         [Tooltip("Optional commentary audio objects for each supported language.")]
-        public List<CommentaryAudio> commentaryAudio = new List<CommentaryAudio>();
+        public List<CommentaryAudio> commentaryAudio = new();
 
         [Tooltip("Allow commentary audio to play.")]
         public bool enableCommentaryAudio = true;
@@ -77,11 +77,11 @@ namespace StudioX.VirtualTour.Core
 
         // Caption handling (internal)
         private CaptionSource _captionSource;
-        private readonly List<Coroutine> _runningCaptionCoroutines = new List<Coroutine>();
+        private readonly List<Coroutine> _runningCaptionCoroutines = new();
 
         [Header("Custom Background Audio Settings")]
         [Tooltip("Optional custom background audio tracks to override video audio.")]
-        public List<AudioClip> customBackgroundAudio = new List<AudioClip>();
+        public List<AudioClip> customBackgroundAudio = new();
 
         [Tooltip("Enable using custom background audio tracks.")]
         public bool enableCustomBackgroundAudio = true;
@@ -108,7 +108,7 @@ namespace StudioX.VirtualTour.Core
 
         [Header("Optional Metadata")]
         [Tooltip("Optional custom display names for each video.")]
-        public List<string> videoDisplayNames = new List<string>();
+        public List<string> videoDisplayNames = new();
 
         [Tooltip("Optional title canvas manager used to show video titles.")]
         public TitleCanvasManager titleCanvasManager;
