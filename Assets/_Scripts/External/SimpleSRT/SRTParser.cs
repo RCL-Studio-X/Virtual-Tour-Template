@@ -61,7 +61,7 @@ namespace StudioX.VirtualTour.External.SimpleSRT
         /// <param name="textAsset">The TextAsset containing SRT-formatted subtitle text.</param>
         public SRTParser(TextAsset textAsset)
         {
-            this._subtitles = Load(textAsset);
+            _subtitles = Load(textAsset);
         }
 
         /// <summary>
