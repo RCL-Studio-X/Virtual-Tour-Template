@@ -71,7 +71,7 @@ namespace StudioX.VirtualTour.External.SimpleSRT
         /// <returns>A list of parsed <see cref="SubtitleBlock"/> objects, or null if the file is missing.</returns>
         public static List<SubtitleBlock> Load(TextAsset textAsset)
         {
-            if (textAsset)
+            if (!textAsset)
             {
                 Debug.LogError("Subtitle file is null");
                 return null;
