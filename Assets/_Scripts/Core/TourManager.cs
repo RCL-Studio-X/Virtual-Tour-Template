@@ -426,7 +426,7 @@ namespace StudioX.VirtualTour.Core
         {
             _commentaryAudioSource.volume = commentaryVolume;
 
-            bool shouldLoadCaptions = (index >= 0 && index < commentaryAudio[selectedLanguage].captionsList.Count) && commentaryAudio[selectedLanguage].captionsList[index] && enableCaptions;
+            bool shouldLoadCaptions = index >= 0 && index < commentaryAudio[selectedLanguage].captionsList.Count && commentaryAudio[selectedLanguage].captionsList[index] && enableCaptions;
             if (shouldLoadCaptions)
                 LoadCaptionsFromSRT(commentaryAudio[selectedLanguage].captionsList[index]);
 
@@ -436,7 +436,7 @@ namespace StudioX.VirtualTour.Core
                 return;
             }
 
-            bool hasCommentary = (index >= 0 && index < commentaryAudio[selectedLanguage].audioList.Count) && commentaryAudio[selectedLanguage].audioList[index];
+            bool hasCommentary = index >= 0 && index < commentaryAudio[selectedLanguage].audioList.Count && commentaryAudio[selectedLanguage].audioList[index];
             if (hasCommentary)
             {
                 _commentaryAudioSource.clip = commentaryAudio[selectedLanguage].audioList[index];
