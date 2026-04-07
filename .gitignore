@@ -109,6 +109,7 @@ InitTestScene*.unity*
 
 *.mp4*
 *.m4a*
+*.wav*
 *.mp3*
 *.ogg*
 *.txt*
