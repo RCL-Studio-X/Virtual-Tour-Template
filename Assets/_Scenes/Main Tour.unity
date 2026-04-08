@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &78889347 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7081734276998890462, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+  m_PrefabInstance: {fileID: 8942425891531646632}
+  m_PrefabAsset: {fileID: 0}
 --- !u!21 &270488916
 Material:
   serializedVersion: 8
@@ -400,6 +405,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: mainCamera
+      value: 
+      objectReference: {fileID: 78889347}
     - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
       propertyPath: enableCaptions
       value: 1
