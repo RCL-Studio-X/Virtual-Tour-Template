@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using NUnit.Framework;
 using StudioX.VirtualTour.External.SimpleSRT;
 using StudioX.VirtualTour.UI;
 using UnityEngine;
@@ -47,15 +48,24 @@ namespace StudioX.VirtualTour.Core
         [Tooltip("Once the last video ends, automatically go back to the starting video.")]
         public bool restartTourAfterLastVideo = false;
 
+        [Tooltip("Restart the tour when the application is paused (e.g., headset goes to sleep).")]
+        public bool restartTourOnHeadsetSleep = true;
+
         [Tooltip("Auto-advance to the next video after the current one finishes.")]
         public bool autoAdvanceVideo = false;
 
         [Tooltip("Allow the video's audio to play through the device/headset.")]
         public bool enableBackgroundAudio = true;
 
-        [Range(0f, 1f)]
+        [UnityEngine.Range(0f, 1f)]
         [Tooltip("Volume used for the video's background audio when enabled.")]
         public float backgroundAudioVolume = 0.25f;
+
+        [Header("Headset Sleep Detection")]
+        public Transform mainCamera;
+
+        [Tooltip("Seconds of no transform change before resetting.")]
+        public float idleResetTime = 1f;
 
         [Header("Commentary Audio Settings")]
         [Tooltip("Optional commentary audio objects for each supported language.")]
@@ -66,7 +76,7 @@ namespace StudioX.VirtualTour.Core
         [Tooltip("Language code (e.g., 'en', 'es') of the currently selected language in the commentaryAudio list.")]
         public string selectedLanguage = "en";
 
-        [Range(0f, 1f)]
+        [UnityEngine.Range(0f, 1f)]
         [Tooltip("Commentary audio volume.")]
         public float commentaryVolume = 1.0f;
 
@@ -86,7 +96,7 @@ namespace StudioX.VirtualTour.Core
         [Tooltip("Enable using custom background audio tracks.")]
         public bool enableCustomBackgroundAudio = true;
 
-        [Range(0f, 1f)]
+        [UnityEngine.Range(0f, 1f)]
         [Tooltip("Volume for custom background audio.")]
         public float customBackgroundVolume = 0.25f;
 
@@ -117,6 +127,10 @@ namespace StudioX.VirtualTour.Core
         private int _currentIndex = 0;
         private bool _isSpawn = true;
         private int _selectedLanguageIndex = 0;
+        private bool isStartUp = true;
+        private Vector3 _lastCamPos;
+        private Quaternion _lastCamRot;
+        private float _noChangeTimer = 0f;
         
         private VideoPlayer _videoPlayer;
         private AudioSource _customBackgroundAudioSource;
@@ -135,10 +149,31 @@ namespace StudioX.VirtualTour.Core
         }
 
         /// <summary>
-        /// Starts playback at the configured start index.
+        /// Starts playback at the configured start index, and initializes camera position/rotation tracking for idle reset if mainCamera is assigned.
         /// </summary>
-        private void Start() =>
+        private void Start()
+        {
+            if (!mainCamera)
+            {
+                mainCamera = FindFirstObjectByType<Camera>()?.transform;
+            }
+
+            if (mainCamera)
+            {
+                _lastCamPos = mainCamera.position;
+                _lastCamRot = mainCamera.rotation;
+            }
+
             PlayVideoAtIndex(startIndex);
+        }
+
+        /// <summary>
+        /// Each frame, call <see cref="DetectHeadsetSleep"/>
+        /// </summary>
+        private void Update()
+        {
+            DetectHeadsetSleep();
+        }
 
         /// <summary>
         /// Ensure <see cref="videoDisplayNames"/> contains sensible values for every video.
@@ -589,6 +624,71 @@ namespace StudioX.VirtualTour.Core
             ClearAllCaptions();
 
             HandleCommentaryAudio(_currentIndex);
+        }
+
+        /// <summary>
+        /// Detect if the headset has been idle (no change in mainCamera transform) for longer than the configured time, and if so reset the tour to the starting index.
+        /// </summary>
+        private void DetectHeadsetSleep()
+        {
+            if (!mainCamera)
+                return;
+
+            bool positionChanged = mainCamera.position != _lastCamPos;
+            bool rotationChanged = mainCamera.rotation != _lastCamRot;
+
+            if (positionChanged || rotationChanged)
+            {
+                // Headset is active
+                _noChangeTimer = 0f;
+            }
+            else
+            {
+                // No change this frame
+                _noChangeTimer += Time.deltaTime;
+            }
+
+            // Store for next frame
+            _lastCamPos = mainCamera.position;
+            _lastCamRot = mainCamera.rotation;
+
+            if (_noChangeTimer >= idleResetTime)
+            {
+                ResetOnHeadsetSleep();
+                _noChangeTimer = 0f;
+            }
+        }
+
+        /// <summary>
+        /// When the application is paused and then resumed (e.g., headset goes to sleep and wakes up), optionally restart the tour from the starting index.
+        /// </summary>
+        /// <param name="pause"></param>
+        private void OnApplicationPause(bool pause)
+        {
+            if (!pause)
+            {
+                if (isStartUp)
+                {
+                    isStartUp = false;
+                    return;
+                }
+                // App just resumed (headset put back on)
+                ResetOnHeadsetSleep();
+            }
+        }
+
+        /// <summary>
+        /// Reset the tour to the starting index when the headset is detected as idle/sleeping.
+        /// </summary>
+        private void ResetOnHeadsetSleep()
+        {
+            if (!restartTourOnHeadsetSleep)
+                return;
+
+            Debug.Log("Headset fell asleep, resetting tour");
+
+            if (_currentIndex != startIndex)
+                PlayVideoAtIndex(startIndex);
         }
 
         /// <summary>
