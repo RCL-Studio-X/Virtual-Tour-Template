@@ -63,8 +63,8 @@ namespace StudioX.VirtualTour.Core
 
         [Tooltip("Allow commentary audio to play.")]
         public bool enableCommentaryAudio = true;
-        [Tooltip("Index of the currently selected language in the commentaryAudio list.")]
-        public int selectedLanguage = 0;
+        [Tooltip("Language code (e.g., 'en', 'es') of the currently selected language in the commentaryAudio list.")]
+        public string selectedLanguage = "en";
 
         [Range(0f, 1f)]
         [Tooltip("Commentary audio volume.")]
@@ -116,6 +116,7 @@ namespace StudioX.VirtualTour.Core
         // Private backing fields
         private int _currentIndex = 0;
         private bool _isSpawn = true;
+        private int _selectedLanguageIndex = 0;
         
         private VideoPlayer _videoPlayer;
         private AudioSource _customBackgroundAudioSource;
@@ -193,7 +194,8 @@ namespace StudioX.VirtualTour.Core
             _customBackgroundAudioSource.spatialBlend = 0f;
             _customBackgroundAudioSource.volume = customBackgroundVolume;
 
-            // Commentary audio source
+            // Commentary audio source and language setup
+            _selectedLanguageIndex = GetSelectedLanguageIndex(selectedLanguage);
             _commentaryAudioSource = gameObject.AddComponent<AudioSource>();
             _commentaryAudioSource.playOnAwake = false;
             _commentaryAudioSource.loop = false;
@@ -296,7 +298,7 @@ namespace StudioX.VirtualTour.Core
             }
 
             // Configure toggles based on available assets
-            bool hasCaptions = (index >= 0 && index < commentaryAudio[selectedLanguage].captionsList.Count) && commentaryAudio[selectedLanguage].captionsList[index];
+            bool hasCaptions = index >= 0 && index < commentaryAudio[_selectedLanguageIndex].captionsList.Count && commentaryAudio[_selectedLanguageIndex].captionsList[index];
             if (captionsToggle)
                 captionsToggle.interactable = hasCaptions;
 
@@ -426,9 +428,9 @@ namespace StudioX.VirtualTour.Core
         {
             _commentaryAudioSource.volume = commentaryVolume;
 
-            bool shouldLoadCaptions = index >= 0 && index < commentaryAudio[selectedLanguage].captionsList.Count && commentaryAudio[selectedLanguage].captionsList[index] && enableCaptions;
+            bool shouldLoadCaptions = index >= 0 && index < commentaryAudio[_selectedLanguageIndex].captionsList.Count && commentaryAudio[_selectedLanguageIndex].captionsList[index] && enableCaptions;
             if (shouldLoadCaptions)
-                LoadCaptionsFromSRT(commentaryAudio[selectedLanguage].captionsList[index]);
+                LoadCaptionsFromSRT(commentaryAudio[_selectedLanguageIndex].captionsList[index]);
 
             if (!enableCommentaryAudio)
             {
@@ -436,10 +438,10 @@ namespace StudioX.VirtualTour.Core
                 return;
             }
 
-            bool hasCommentary = index >= 0 && index < commentaryAudio[selectedLanguage].audioList.Count && commentaryAudio[selectedLanguage].audioList[index];
+            bool hasCommentary = index >= 0 && index < commentaryAudio[_selectedLanguageIndex].audioList.Count && commentaryAudio[_selectedLanguageIndex].audioList[index];
             if (hasCommentary)
             {
-                _commentaryAudioSource.clip = commentaryAudio[selectedLanguage].audioList[index];
+                _commentaryAudioSource.clip = commentaryAudio[_selectedLanguageIndex].audioList[index];
                 _commentaryAudioSource.Play();
                 return;
             }
@@ -479,10 +481,10 @@ namespace StudioX.VirtualTour.Core
                 return;
             }
 
-            if (commentaryAudio[selectedLanguage].captionsList?.Count > _currentIndex && commentaryAudio[selectedLanguage].captionsList[_currentIndex] && _commentaryAudioSource.clip)
+            if (commentaryAudio[_selectedLanguageIndex].captionsList?.Count > _currentIndex && commentaryAudio[_selectedLanguageIndex].captionsList[_currentIndex] && _commentaryAudioSource.clip)
             {
                 double currentTime = _commentaryAudioSource.time;
-                LoadCaptionsFromSRT(commentaryAudio[selectedLanguage].captionsList[_currentIndex], currentTime);
+                LoadCaptionsFromSRT(commentaryAudio[_selectedLanguageIndex].captionsList[_currentIndex], currentTime);
             }
         }
 
@@ -556,6 +558,37 @@ namespace StudioX.VirtualTour.Core
 
             if (_captionSource && CaptionRenderManager.Instance && CaptionRenderManager.Instance.currentRenderer)
                 CaptionRenderManager.Instance.ClearCaptions();
+        }
+
+        /// <summary>
+        /// Returns the index of the currently selected language in the commentaryAudio list based on the selectedLanguage code. Defaults to 0 if not found.
+        /// </summary>
+        /// <param name="languageCode"></param>
+        /// <returns></returns>
+        public int GetSelectedLanguageIndex(string languageCode)
+        {
+            for (int i = 0; i < commentaryAudio.Count; i++)
+            {
+                if (commentaryAudio[i].languageCode == languageCode)
+                    return i;
+            }
+            return 0; // Default to first language if not found
+        }
+        
+
+        /// <summary>
+        /// Change the currently selected language for commentary audio and captions. This will stop current commentary audio, clear captions, and load the new language's assets for the current video index.
+        /// </summary>
+        /// <param name="languageCode"></param>
+        public void ChangeLanguage(string languageCode)
+        {
+            _selectedLanguageIndex = GetSelectedLanguageIndex(languageCode);
+            selectedLanguage = commentaryAudio[_selectedLanguageIndex].languageCode;
+
+            _commentaryAudioSource.Stop();
+            ClearAllCaptions();
+
+            HandleCommentaryAudio(_currentIndex);
         }
 
         /// <summary>
