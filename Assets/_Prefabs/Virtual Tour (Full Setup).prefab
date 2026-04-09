@@ -108,6 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 437732081875836878}
   - component: {fileID: 6242735585677720122}
+  - component: {fileID: 3781414966858701593}
   m_Layer: 0
   m_Name: Virtual Tour (Full Setup)
   m_TagString: Untagged
@@ -145,15 +146,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xrOrigin: {fileID: 846724502252823532}
-  defaultRotations: []
+  hmdRemovalDetector: {fileID: 3781414966858701593}
   tourVideos: []
   startIndex: 0
+  restartTourAfterLastVideo: 0
+  restartTourOnHeadsetRemoved: 1
+  autoAdvanceVideo: 0
   enableBackgroundAudio: 0
+  defaultRotations: []
   backgroundAudioVolume: 0.25
   commentaryAudio: []
   enableCommentaryAudio: 1
+  selectedLanguage: en
   commentaryVolume: 1
-  commentaryCaptions: []
   enableCaptions: 1
   customBackgroundAudio: []
   enableCustomBackgroundAudio: 1
@@ -165,6 +170,24 @@ MonoBehaviour:
   captionsToggle: {fileID: 6655065595668835972}
   videoDisplayNames: []
   titleCanvasManager: {fileID: 3140889348713194963}
+--- !u!114 &3781414966858701593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3649993256357206893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad432773548c9ec4597aca6ba69a69bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnRemoval:
+    m_PersistentCalls:
+      m_Calls: []
+  OnWake:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7173480423068766746
 GameObject:
   m_ObjectHideFlags: 0
