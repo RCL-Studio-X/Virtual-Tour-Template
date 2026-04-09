@@ -1,15 +1,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using StudioX.VirtualTour.External.SimpleSRT;
-using StudioX.VirtualTour.UI;
+using StudioXRCL.VirtualTour.External.SimpleSRT;
+using StudioXRCL.VirtualTour.UI;
 using StudioXRCL.VirtualTour.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
 using XRAccess.Chirp;
 
-namespace StudioX.VirtualTour.Core
+namespace StudioXRCL.VirtualTour.Core
 {
     /// <summary>
     /// Manages the lifecycle, playback and related audio/caption behavior for a virtual tour composed of 360 videos.
@@ -325,7 +325,7 @@ namespace StudioX.VirtualTour.Core
             if (hasCaptions && captionsToggle)
                 captionsToggle.isOn = enableCaptions;
 
-            bool hasCommentary = (index >= 0 && index < commentaryAudio.Count) && commentaryAudio[index];
+            bool hasCommentary = index >= 0 && index < commentaryAudio[_selectedLanguageIndex].audioList.Count && commentaryAudio[_selectedLanguageIndex].audioList[index];
             if (commentaryToggle)
                 commentaryToggle.interactable = hasCommentary;
 

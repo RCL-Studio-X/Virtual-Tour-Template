@@ -31,7 +31,7 @@ Accessed on 6/25/2025 at 01:05 PM EST.
 This file has been modified from its original source.
 */
 
-namespace StudioX.VirtualTour.External.SimpleSRT
+namespace StudioXRCL.VirtualTour.External.SimpleSRT
 {
     /// <summary>
     /// Parses SRT subtitle files into <see cref="SubtitleBlock"/> objects.

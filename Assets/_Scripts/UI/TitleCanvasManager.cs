@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
 
-namespace StudioX.VirtualTour.UI
+namespace StudioXRCL.VirtualTour.UI
 {
     /// <summary>
     /// Manages the title canvas during initialization and updates the displayed title text.

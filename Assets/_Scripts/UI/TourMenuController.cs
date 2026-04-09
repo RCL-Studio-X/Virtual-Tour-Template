@@ -1,10 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using StudioX.VirtualTour.Core;
+using StudioXRCL.VirtualTour.Core;
 using TMPro;
 
-namespace StudioX.VirtualTour.UI
+namespace StudioXRCL.VirtualTour.UI
 {
     /// <summary>
     /// Controls population and interaction behavior for the video selection menu.
