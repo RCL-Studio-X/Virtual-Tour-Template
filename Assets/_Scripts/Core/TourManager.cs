@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using StudioX.VirtualTour.External.SimpleSRT;
 using StudioX.VirtualTour.UI;
+using StudioXRCL.VirtualTour.Utilities;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -33,9 +34,9 @@ namespace StudioX.VirtualTour.Core
         [Header("References")]
         [Tooltip("Optional XR origin whose Y rotation will be set when switching videos.")]
         public GameObject xrOrigin;
-        
-        [Tooltip("What the XR Origin's Y rotation will be when switching to each video. Each video that has no override will default to 80.")]
-        public List<float> defaultRotations = new();
+
+        [Tooltip("Optional HMDRemovalDetector component. If assigned, the tour will automatically restart from the beginning when the headset is removed if 'restartTourOnHeadsetRemoved' is enabled.")]
+        public HMDRemovalDetector hmdRemovalDetector;
 
         [Header("Video Tour Settings")]
         [Tooltip("Video clips that comprise the tour.")]
@@ -47,11 +48,17 @@ namespace StudioX.VirtualTour.Core
         [Tooltip("Once the last video ends, automatically go back to the starting video.")]
         public bool restartTourAfterLastVideo = false;
 
+        [Tooltip("Restart the tour when the headset is removed.")]
+        public bool restartTourOnHeadsetRemoved = true;
+
         [Tooltip("Auto-advance to the next video after the current one finishes.")]
         public bool autoAdvanceVideo = false;
 
         [Tooltip("Allow the video's audio to play through the device/headset.")]
         public bool enableBackgroundAudio = true;
+
+        [Tooltip("What the XR Origin's Y rotation will be when switching to each video. Each video that has no override will default to 80.")]
+        public List<float> defaultRotations = new();
 
         [Range(0f, 1f)]
         [Tooltip("Volume used for the video's background audio when enabled.")]
@@ -74,10 +81,6 @@ namespace StudioX.VirtualTour.Core
 
         [Tooltip("Enable showing captions from loaded SRTs.")]
         public bool enableCaptions = true;
-
-        // Caption handling (internal)
-        private CaptionSource _captionSource;
-        private readonly List<Coroutine> _runningCaptionCoroutines = new();
 
         [Header("Custom Background Audio Settings")]
         [Tooltip("Optional custom background audio tracks to override video audio.")]
@@ -113,11 +116,12 @@ namespace StudioX.VirtualTour.Core
         [Tooltip("Optional title canvas manager used to show video titles.")]
         public TitleCanvasManager titleCanvasManager;
 
-        // Private backing fields
+        // Private variables
         private int _currentIndex = 0;
-        private bool _isSpawn = true;
         private int _selectedLanguageIndex = 0;
-        
+        private bool _isSpawn = true;
+        private CaptionSource _captionSource;
+        private readonly List<Coroutine> _runningCaptionCoroutines = new();
         private VideoPlayer _videoPlayer;
         private AudioSource _customBackgroundAudioSource;
         private AudioSource _commentaryAudioSource;
@@ -135,10 +139,12 @@ namespace StudioX.VirtualTour.Core
         }
 
         /// <summary>
-        /// Starts playback at the configured start index.
+        /// Starts playback at the configured start index, and initializes camera position/rotation tracking for idle reset if mainCamera is assigned.
         /// </summary>
-        private void Start() =>
+        private void Start()
+        {
             PlayVideoAtIndex(startIndex);
+        }
 
         /// <summary>
         /// Ensure <see cref="videoDisplayNames"/> contains sensible values for every video.
@@ -162,6 +168,20 @@ namespace StudioX.VirtualTour.Core
         /// </summary>
         private void SetupComponents()
         {
+            if (hmdRemovalDetector)
+            {
+                if (!restartTourOnHeadsetRemoved)
+                    hmdRemovalDetector.enabled = false;
+                else
+                {
+                    hmdRemovalDetector.OnWake.AddListener(() =>
+                    {
+                        if (restartTourOnHeadsetRemoved)
+                            PlayVideoAtIndex(startIndex);
+                    });
+                }
+            }
+
             // Skybox
             if (!RenderSettings.skybox)
             {
