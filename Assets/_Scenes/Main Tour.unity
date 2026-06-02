@@ -315,6 +315,10 @@ PrefabInstance:
       propertyPath: videoDisplayNames.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2459174060602467028, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: options.reducedMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3649993256357206893, guid: a375420a3446cff4a8202556fc42870c, type: 3}
       propertyPath: m_Name
       value: Virtual Tour (Full Setup)
@@ -398,7 +402,7 @@ PrefabInstance:
     - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
       propertyPath: 'tourVideos.Array.data[10]'
       value: 
-      objectReference: {fileID: 32900000, guid: ae5f3e4c079287246b97816564769959, type: 3}
+      objectReference: {fileID: 32900000, guid: ff5c4b0545eded04384c5ad49d305758, type: 3}
     - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
       propertyPath: backgroundAudio.Array.size
       value: 1
