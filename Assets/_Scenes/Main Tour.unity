@@ -312,28 +312,48 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 917664257233863799, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2029813385678002890, guid: a375420a3446cff4a8202556fc42870c, type: 3}
       propertyPath: videoDisplayNames.Array.size
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2073862608760045932, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2459174060602467028, guid: a375420a3446cff4a8202556fc42870c, type: 3}
       propertyPath: options.reducedMotion
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3571465158408525748, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3649993256357206893, guid: a375420a3446cff4a8202556fc42870c, type: 3}
       propertyPath: m_Name
       value: Virtual Tour (Full Setup)
       objectReference: {fileID: 0}
+    - target: {fileID: 3826209357450389665, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4623778046787732041, guid: a375420a3446cff4a8202556fc42870c, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4623778046787732041, guid: a375420a3446cff4a8202556fc42870c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.9999715
       objectReference: {fileID: 0}
     - target: {fileID: 4623778046787732041, guid: a375420a3446cff4a8202556fc42870c, type: 3}
       propertyPath: m_AnchorMin.y
+      value: 0.6133049
+      objectReference: {fileID: 0}
+    - target: {fileID: 5812531606111927306, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
@@ -532,16 +552,36 @@ PrefabInstance:
       propertyPath: 'videoLengthsInSeconds.Array.data[9]'
       value: 40
       objectReference: {fileID: 0}
+    - target: {fileID: 6373783818622940406, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7534836741420838587, guid: a375420a3446cff4a8202556fc42870c, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7534836741420838587, guid: a375420a3446cff4a8202556fc42870c, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7534836741420838587, guid: a375420a3446cff4a8202556fc42870c, type: 3}
       propertyPath: m_SizeDelta.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7969662646413729632, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8445095359259702432, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8855649103888277074, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9191194160767230666, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
