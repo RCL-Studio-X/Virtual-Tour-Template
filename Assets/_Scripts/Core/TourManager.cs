@@ -402,6 +402,11 @@ namespace StudioXRCL.VirtualTour.Core
             _isSpawn = false;
         }
 
+        /// <summary>
+        /// Coroutine that waits for a specified number of seconds before invoking the video end handler. This is used when custom video lengths are specified to auto-advance to the next video.
+        /// </summary>
+        /// <param name="length">The duration in seconds to wait before ending the video.</param>
+        /// <returns></returns>
         private IEnumerator EndVideoAfterSeconds(int length)
         {
             yield return new WaitForSeconds(length);
