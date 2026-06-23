@@ -109,9 +109,12 @@ namespace StudioXRCL.VirtualTour.Core
         [Tooltip("Toggle to enable/disable captions.")]
         public Toggle captionsToggle;
 
-        [Header("Optional Metadata")]
+        [Header("Optional Video Settings")]
         [Tooltip("Optional custom display names for each video.")]
         public List<string> videoDisplayNames = new();
+
+        [Tooltip("Optional custom video lengths in seconds for each video. If specified, the video will end after this duration instead of relying on the clip's length.")]
+        public List<int> videoLengthsInSeconds = new();
 
         [Tooltip("Optional title canvas manager used to show video titles.")]
         public TitleCanvasManager titleCanvasManager;
@@ -122,6 +125,7 @@ namespace StudioXRCL.VirtualTour.Core
         private bool _isSpawn = true;
         private CaptionSource _captionSource;
         private readonly List<Coroutine> _runningCaptionCoroutines = new();
+        private Coroutine _endVideoAfterSecondsCoroutine;
         private VideoPlayer _videoPlayer;
         private AudioSource _customBackgroundAudioSource;
         private AudioSource _commentaryAudioSource;
@@ -306,6 +310,13 @@ namespace StudioXRCL.VirtualTour.Core
         /// <param name="index">Index of the video to play.</param>
         public void PlayVideoAtIndex(int index)
         {
+            // Stop any scheduled video end coroutines before starting a new video to prevent overlap or unexpected behavior
+            if (_endVideoAfterSecondsCoroutine != null)
+            {
+                StopCoroutine(_endVideoAfterSecondsCoroutine);
+                _endVideoAfterSecondsCoroutine = null;
+            }
+
             // Validate index early
             if (index < 0 || index >= tourVideos.Count)
             {
@@ -364,6 +375,13 @@ namespace StudioXRCL.VirtualTour.Core
 
                 _videoPlayer.clip = clip;
                 _videoPlayer.targetTexture = _renderTexture;
+                
+                // If a video length is provided for this index, schedule the video to end after that duration
+                if (videoLengthsInSeconds != null && index < videoLengthsInSeconds.Count && videoLengthsInSeconds[index] > 0)
+                {
+                    int length = videoLengthsInSeconds[index];
+                    _endVideoAfterSecondsCoroutine = StartCoroutine(EndVideoAfterSeconds(length));
+                }
                 _videoPlayer.Play();
 
                 if (_skyboxMaterial)
@@ -382,6 +400,12 @@ namespace StudioXRCL.VirtualTour.Core
             UpdateButtonStates();
             OnVideoChanged?.Invoke(_currentIndex);
             _isSpawn = false;
+        }
+
+        private IEnumerator EndVideoAfterSeconds(int length)
+        {
+            yield return new WaitForSeconds(length);
+            OnVideoEnd(_videoPlayer);
         }
 
         /// <summary>
