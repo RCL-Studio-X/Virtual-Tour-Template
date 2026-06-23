@@ -113,7 +113,7 @@ namespace StudioXRCL.VirtualTour.Core
         [Tooltip("Optional custom display names for each video.")]
         public List<string> videoDisplayNames = new();
 
-        [Tooltip("Optional custom video lengths in seconds for each video. If specified, the video will end after this duration instead of relying on the clip's length.")]
+        [Tooltip("Optional custom video lengths in seconds for each video. If specified, the video will end after this duration instead of relying on the clip's length. Only usable if 'autoAdvanceVideo' is enabled.")]
         public List<int> videoLengthsInSeconds = new();
 
         [Tooltip("Optional title canvas manager used to show video titles.")]
@@ -377,7 +377,7 @@ namespace StudioXRCL.VirtualTour.Core
                 _videoPlayer.targetTexture = _renderTexture;
                 
                 // If a video length is provided for this index, schedule the video to end after that duration
-                if (videoLengthsInSeconds != null && index < videoLengthsInSeconds.Count && videoLengthsInSeconds[index] > 0)
+                if (autoAdvanceVideo && videoLengthsInSeconds != null && index < videoLengthsInSeconds.Count && videoLengthsInSeconds[index] > 0)
                 {
                     int length = videoLengthsInSeconds[index];
                     _endVideoAfterSecondsCoroutine = StartCoroutine(EndVideoAfterSeconds(length));
