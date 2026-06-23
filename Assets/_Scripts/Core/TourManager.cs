@@ -420,8 +420,12 @@ namespace StudioXRCL.VirtualTour.Core
                 return;
             }
 
+            // If auto-advance is enabled and there is a next video, play it
             if (autoAdvanceVideo)
-                PlayVideoAtIndex(_currentIndex + 1);
+            {
+                if (_currentIndex + 1 < tourVideos.Count)
+                    PlayVideoAtIndex(_currentIndex + 1);
+            }
         }
 
         /// <summary>
