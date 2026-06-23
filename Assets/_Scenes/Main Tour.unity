@@ -203,6 +203,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7d48df8eb5e0ed749b5532be882a0206, type: 3}
   - {fileID: 8300000, guid: 83c7e1b291a187644bd3ad9e31950469, type: 3}
   - {fileID: 8300000, guid: c320efc71c2d9ed4aa404a46ede28030, type: 3}
+  - {fileID: 8300000, guid: ce288be1478d0ca4d8ed4c90feac9ae2, type: 3}
   - {fileID: 8300000, guid: 95a5e9f111e07fc4483dce1ca90ee041, type: 3}
   - {fileID: 8300000, guid: 60461d5e7fc19944391bdd0546b89c06, type: 3}
   captionsList:
@@ -487,6 +488,50 @@ PrefabInstance:
       propertyPath: 'commentaryCaptions.Array.data[2]'
       value: 
       objectReference: {fileID: 4900000, guid: 2682010675b4ea84a877361f7491683a, type: 3}
+    - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: videoLengthsInSeconds.Array.size
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: 'videoLengthsInSeconds.Array.data[0]'
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: 'videoLengthsInSeconds.Array.data[1]'
+      value: 51
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: 'videoLengthsInSeconds.Array.data[2]'
+      value: 38
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: 'videoLengthsInSeconds.Array.data[3]'
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: 'videoLengthsInSeconds.Array.data[4]'
+      value: 41
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: 'videoLengthsInSeconds.Array.data[5]'
+      value: 31
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: 'videoLengthsInSeconds.Array.data[6]'
+      value: 44
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: 'videoLengthsInSeconds.Array.data[7]'
+      value: 26
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: 'videoLengthsInSeconds.Array.data[8]'
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 6242735585677720122, guid: a375420a3446cff4a8202556fc42870c, type: 3}
+      propertyPath: 'videoLengthsInSeconds.Array.data[9]'
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 7534836741420838587, guid: a375420a3446cff4a8202556fc42870c, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
